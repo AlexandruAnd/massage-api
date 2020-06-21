@@ -6,6 +6,7 @@ import org.fasttrackit.massageapi.persistance.PatientRepository;
 import org.fasttrackit.massageapi.transfer.SavePatientRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,20 @@ public class PatientService {
         return patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundExeption(
                 "Patient " + id + " not found"));
 
+    }
+
+
+
+    public Patient updatePatient(long id, SavePatientRequest request){
+        LOGGER.info("Updateing patient information {}: {} ", id , request);
+        Patient patient = getPatient(id);
+        BeanUtils.copyProperties(request, patient);
+
+        return patientRepository.save(patient);
+    }
+
+    public void deletePatient(long id){
+        LOGGER.info("Deleting patient {}", id);
+        patientRepository.deleteById(id);
     }
 }
