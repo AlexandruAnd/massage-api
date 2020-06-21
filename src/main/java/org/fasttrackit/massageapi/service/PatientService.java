@@ -1,6 +1,7 @@
 package org.fasttrackit.massageapi.service;
 
 import org.fasttrackit.massageapi.domain.Patient;
+import org.fasttrackit.massageapi.exeption.PatientNotFoundExeption;
 import org.fasttrackit.massageapi.persistance.PatientRepository;
 import org.fasttrackit.massageapi.transfer.SavePatientRequest;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ public class PatientService {
         this.patientRepository = patientRepository;
     }
 
-    public Patient createPatient(SavePatientRequest request){
+    public Patient createPatient(SavePatientRequest request) {
         LOGGER.info("Creating patient {}", request);
         Patient patient = new Patient();
         patient.setName(request.getName());
@@ -30,6 +31,14 @@ public class PatientService {
         patient.setPhone(request.getPhone());
 
         return patientRepository.save(patient);
+
+    }
+
+    public Patient getPatient(long id) {
+        LOGGER.info("Retriving patient {}", id);
+
+        return patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundExeption(
+                "Patient " + id + " not found"));
 
     }
 }
