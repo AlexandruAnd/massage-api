@@ -2,7 +2,7 @@ package org.fasttrackit.massageapi.web;
 
 import org.fasttrackit.massageapi.domain.Patient;
 import org.fasttrackit.massageapi.service.PatientService;
-import org.fasttrackit.massageapi.transfer.SavePatientRequest;
+import org.fasttrackit.massageapi.transfer.patient.SavePatientRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

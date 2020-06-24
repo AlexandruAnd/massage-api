@@ -7,7 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PatientRepository extends JpaRepository <Patient, Long> {
 
-    Page<Patient> findByNameContaining(String partialName, Pageable pageable);
+    Page<Patient> findByNameContaining (String partialName, Pageable pageable);
 
+    Page<Patient> findByMassageContaining(String partialMassage, Pageable pageable);
+
+    Page<Patient> findByNameContainingAndMassageContaining (String partialName, String partialMassage, Pageable pageable);
 
 }

@@ -3,14 +3,15 @@ package org.fasttrackit.massageapi.service;
 import org.fasttrackit.massageapi.domain.Patient;
 import org.fasttrackit.massageapi.exeption.PatientNotFoundExeption;
 import org.fasttrackit.massageapi.persistance.PatientRepository;
-import org.fasttrackit.massageapi.transfer.SavePatientRequest;
+import org.fasttrackit.massageapi.transfer.patient.GetPatientRequest;
+import org.fasttrackit.massageapi.transfer.patient.SavePatientRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class PatientService {
@@ -30,6 +31,7 @@ public class PatientService {
         patient.setDate(request.getDate());
         patient.setEmail(request.getEmail());
         patient.setPhone(request.getPhone());
+        patient.setMassage(request.getMassage());
 
         return patientRepository.save(patient);
 
@@ -41,6 +43,21 @@ public class PatientService {
         return patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundExeption(
                 "Patient " + id + " not found"));
 
+    }
+    public Page<Patient> getPatients(GetPatientRequest request, Pageable pageable) {
+        LOGGER.info("Searching patient : {}", request);
+
+        if (request != null) {
+            if (request.getPartialName() != null && request.getPartialMassage() != null) {
+                return patientRepository.findByNameContainingAndMassageContaining(
+                        request.getPartialName(), request.getPartialMassage(), pageable);
+            } else if (request.getPartialName() != null) {
+                return patientRepository.findByNameContaining(request.getPartialName(), pageable);
+            }else if (request.getPartialMassage() !=null){
+                return patientRepository.findByMassageContaining(request.getPartialMassage(), pageable);
+            }
+        }
+        return patientRepository.findAll(pageable);
     }
 
 

@@ -1,7 +1,5 @@
 package org.fasttrackit.massageapi.domain;
 
-import org.springframework.lang.NonNull;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,6 +20,7 @@ public class Patient {
     private long phone;
     @NotNull
     private String email;
+    private String massage;
 
 
     public long getId() {
@@ -64,6 +63,14 @@ public class Patient {
         this.email = email;
     }
 
+    public String getMassage() {
+        return massage;
+    }
+
+    public void setMassage(String massage) {
+        this.massage = massage;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
@@ -72,6 +79,7 @@ public class Patient {
                 ", date=" + date +
                 ", phone=" + phone +
                 ", email='" + email + '\'' +
+                ", massage='" + massage + '\'' +
                 '}';
     }
 }
