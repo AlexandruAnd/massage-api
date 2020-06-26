@@ -38,7 +38,7 @@ public class PatientService {
     }
 
     public Patient getPatient(long id) {
-        LOGGER.info("Retriving patient {}", id);
+        LOGGER.info("Retrieving patient {}", id);
 
         return patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundExeption(
                 "Patient " + id + " not found"));
@@ -53,8 +53,6 @@ public class PatientService {
                         request.getPartialName(), request.getPartialMassage(), pageable);
             } else if (request.getPartialName() != null) {
                 return patientRepository.findByNameContaining(request.getPartialName(), pageable);
-            }else if (request.getPartialMassage() !=null){
-                return patientRepository.findByMassageContaining(request.getPartialMassage(), pageable);
             }
         }
         return patientRepository.findAll(pageable);

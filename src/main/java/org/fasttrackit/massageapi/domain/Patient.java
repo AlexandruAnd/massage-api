@@ -12,9 +12,7 @@ public class Patient {
     @Id
     @GeneratedValue
     private long id;
-    @NotNull
     private String name;
-    @NotNull
     private LocalDate date;
     @NotNull
     private long phone;

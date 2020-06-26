@@ -5,13 +5,11 @@ import java.time.LocalDate;
 
 public class SavePatientRequest {
 
-    @NotNull
+
     private String name;
-    @NotNull
     private LocalDate date;
     @NotNull
     private Long phone;
-    @NotNull
     private String email;
     private String massage;
 
