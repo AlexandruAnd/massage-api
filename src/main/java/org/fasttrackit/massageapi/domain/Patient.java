@@ -15,8 +15,7 @@ public class Patient {
     private String name;
     private LocalDate date;
     @NotNull
-    private long phone;
-    @NotNull
+    private String phone;
     private String email;
     private String massage;
 
@@ -45,11 +44,11 @@ public class Patient {
         this.date = date;
     }
 
-    public long getPhone() {
+    public @NotNull String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

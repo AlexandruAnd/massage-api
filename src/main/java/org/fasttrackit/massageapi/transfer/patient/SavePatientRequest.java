@@ -1,6 +1,5 @@
 package org.fasttrackit.massageapi.transfer.patient;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class SavePatientRequest {
@@ -8,8 +7,7 @@ public class SavePatientRequest {
 
     private String name;
     private LocalDate date;
-    @NotNull
-    private Long phone;
+    private String phone;
     private String email;
     private String massage;
 
@@ -29,11 +27,11 @@ public class SavePatientRequest {
         this.date = date;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
