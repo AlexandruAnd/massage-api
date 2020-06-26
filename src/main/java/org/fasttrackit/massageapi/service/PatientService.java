@@ -1,7 +1,7 @@
 package org.fasttrackit.massageapi.service;
 
 import org.fasttrackit.massageapi.domain.Patient;
-import org.fasttrackit.massageapi.exeption.PatientNotFoundExeption;
+import org.fasttrackit.massageapi.exeption.ResurceNotFoundExeption;
 import org.fasttrackit.massageapi.persistance.PatientRepository;
 import org.fasttrackit.massageapi.transfer.patient.GetPatientRequest;
 import org.fasttrackit.massageapi.transfer.patient.SavePatientRequest;
@@ -40,7 +40,7 @@ public class PatientService {
     public Patient getPatient(long id) {
         LOGGER.info("Retrieving patient {}", id);
 
-        return patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundExeption(
+        return patientRepository.findById(id).orElseThrow(() -> new ResurceNotFoundExeption(
                 "Patient " + id + " not found"));
 
     }
