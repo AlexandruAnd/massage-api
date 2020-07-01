@@ -9,9 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PatientService {
@@ -44,18 +46,18 @@ public class PatientService {
                 "Patient " + id + " not found"));
 
     }
-    public Page<Patient> getPatients(GetPatientRequest request, Pageable pageable) {
+    public List<Patient> getPatients(GetPatientRequest request) {
         LOGGER.info("Searching patient : {}", request);
 
         if (request != null) {
             if (request.getPartialName() != null && request.getPartialMassage() != null) {
                 return patientRepository.findByNameContainingAndMassageContaining(
-                        request.getPartialName(), request.getPartialMassage(), pageable);
+                        request.getPartialName(), request.getPartialMassage());
             } else if (request.getPartialName() != null) {
-                return patientRepository.findByNameContaining(request.getPartialName(), pageable);
+                return patientRepository.findByNameContaining(request.getPartialName());
             }
         }
-        return patientRepository.findAll(pageable);
+        return patientRepository.findAll();
     }
 
 
