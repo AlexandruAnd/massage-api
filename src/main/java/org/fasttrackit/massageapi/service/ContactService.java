@@ -1,13 +1,18 @@
 package org.fasttrackit.massageapi.service;
 
 import org.fasttrackit.massageapi.domain.Contact;
+import org.fasttrackit.massageapi.domain.Patient;
 import org.fasttrackit.massageapi.exeption.ResurceNotFoundExeption;
 import org.fasttrackit.massageapi.persistance.ContactRepository;
+import org.fasttrackit.massageapi.transfer.contact.GetContactRequest;
 import org.fasttrackit.massageapi.transfer.contact.SaveContactRequest;
+import org.fasttrackit.massageapi.transfer.patient.GetPatientRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ContactService {
@@ -33,6 +38,17 @@ public class ContactService {
         LOGGER.info("Retrieving contact {}", id);
         return contactRepository.findById(id).orElseThrow(() -> new ResurceNotFoundExeption("" +
                 "Contact" + id + " not found"));
+    }
+
+    public List<Contact> getContacts( GetContactRequest request) {
+        LOGGER.info("Searching contact : {}", request);
+
+        if (request != null) {
+           if (request.getPartialName() != null) {
+                return contactRepository.findByNameContaining(request.getPartialName());
+            }
+        }
+        return contactRepository.findAll();
     }
 
     public void deleteContact(long id){

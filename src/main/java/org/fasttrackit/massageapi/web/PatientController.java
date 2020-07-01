@@ -5,17 +5,11 @@ import org.fasttrackit.massageapi.service.PatientService;
 import org.fasttrackit.massageapi.transfer.patient.GetPatientRequest;
 import org.fasttrackit.massageapi.transfer.patient.SavePatientRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin
